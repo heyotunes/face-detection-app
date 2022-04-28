@@ -13,7 +13,7 @@ const db = knex({
   // connect to your own database here:
   client: 'pg',
   connection: {
-    host : 'process.env.DATABASE_URL',
+    connectionString : process.env.DATABASE_URL,
     ssl: true,
   }
 });
@@ -30,7 +30,7 @@ const options = {
 
 app.use(cors(options));
 
-app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
+app.use(bodyParser.json()); // latest version of exressJS now comes with Body-Parser!
 
 app.get('/', (req, res)=> { res.send('it is working') })
 app.post('/signin', signin.handleSignin(db, bcrypt))
